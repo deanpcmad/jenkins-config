@@ -6,7 +6,6 @@
       !include: aur-package-list.yaml
     jobs:
       - "aur-package-{package}"
-      - "aur-package-dataloop-agent"
       - "aur-package-last-known-good"
       - "aur-package-linux-git"
 
@@ -17,31 +16,6 @@
       Do not edit this via the web interface. Any changes may be lost at any
       time.
     properties:
-      - authorization:
-          jstephenson:
-            - job-build
-            - job-read
-            - job-extended-read
-          proffalken:
-            - job-build
-            - job-read
-            - job-extended-read
-          GregSharpe1:
-            - job-build
-            - job-read
-            - job-extended-read
-          jamaalprimus:
-            - job-build
-            - job-read
-            - job-extended-read
-          jamaalprimus:
-            - job-build
-            - job-read
-            - job-extended-read
-          bbozhev:
-            - job-build
-            - job-read
-            - job-extended-read
       - throttle:
           enabled: true
           max-per-node: 1
@@ -68,7 +42,7 @@
       - description-setter:
           regexp: 'Finished making: (\S* \S*)'
       - ssh:
-          site: repo-manager
+          site: web.deanpcmad.com
           target: private/new
           source: '*.pkg.tar.xz'
           command:
@@ -111,17 +85,6 @@
 
 # Custom template sepcifically for dataloop-agent, which will put the packaging
 # information directly from my private fork of the main repository.
-
-- job-template:
-    name: aur-package-dataloop-agent
-    display-name: "dataloop-agent"
-    defaults: aur
-    scm:
-      - git:
-          url: 'https://github.com/jonathanio/dataloop-archlinux.git'
-          branches:
-            - '*/master'
-          skip-tag: true
 
 - job-template:
     name: aur-package-last-known-good
