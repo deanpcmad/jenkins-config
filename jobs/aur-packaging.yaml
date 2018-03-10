@@ -33,7 +33,6 @@
     triggers:
       - pollscm:
           cron: "@hourly"
-      # - timed: '@yearly'
     builders:
       - shell:
           !include-raw-escape: build-package.sh
@@ -41,14 +40,6 @@
     publishers:
       - description-setter:
           regexp: 'Finished making: (\S* \S*)'
-      - ssh:
-          site: web.deanpcmad.com
-          target: private/new
-          source: '*.pkg.tar.xz'
-          command:
-            !include-raw-escape: repo-add.sh
-          timeout: 300000
-          fail-on-error: true
       - archive:
           artifacts: '*.pkg.tar.xz'
           allow-empty: 'false'
